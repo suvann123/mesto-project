@@ -1,0 +1,16 @@
+.gallery__like {
+  height: 19px;
+  width: 22px;
+  background-image: url(../../../images/Groupheart2.jpg);
+  margin: 31px 20px auto auto;
+  border: 0;
+
+ 
+}
+.gallery__like:hover {
+  transition: linear;
+  opacity: 0.5;
+}
+.gallery__like:active {
+  background-image: url(../../../images/groupheart-active.svg);
+}

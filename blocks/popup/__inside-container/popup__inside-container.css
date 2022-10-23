@@ -1,0 +1,13 @@
+.popup__inside-container {
+  width: 358px;
+  height: fit-content;
+  margin: 0 auto 0 auto;
+  border: 0;
+  padding: 0;
+}
+
+@media (max-width: 920px) {
+  .popup__inside-container {
+    width: 238px;
+  }
+}

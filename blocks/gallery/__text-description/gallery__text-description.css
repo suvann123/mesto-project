@@ -1,0 +1,18 @@
+.gallery__text-description {
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  color: #000000;
+  margin: 25px auto 31px 21px;
+  max-width: 180px;
+}
+@media (max-width: 1200px) {
+  .gallery__text-description {
+    max-width: 130px;
+    font-size: 18px;
+} }
