@@ -1,16 +1,21 @@
 .gallery__like {
+  margin: 0;
   height: 19px;
   width: 22px;
-  background-image: url(../../../images/Groupheart2.jpg);
+  background-image: url(../../../images/Groupheart.svg);
+  background-color: white;
+  background-size: cover;
+  background-position: center;
   margin: 31px 20px auto auto;
   border: 0;
-
- 
+  cursor: pointer;
 }
+
 .gallery__like:hover {
   transition: linear;
   opacity: 0.5;
 }
+
 .gallery__like:active {
   background-image: url(../../../images/groupheart-active.svg);
 }

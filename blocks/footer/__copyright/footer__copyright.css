@@ -8,9 +8,12 @@
   color: #545454;
   width: calc(100% - 400px);
 }
+
 @media (max-width: 920px) {
-  .footer__copyright{
+  .footer__copyright {
     width: 282px;
     margin: 0 auto 36px auto;
+    font-size: 14px;
+    line-height: 17px;
   }
 }

@@ -16,3 +16,13 @@
     max-width: 130px;
     font-size: 18px;
 } }
+@media (max-width: 800px) {
+  .gallery__text-description {
+    max-width: 110px;
+    
+} }
+@media (max-width: 720px) {
+  .gallery__text-description {
+    font-size: 24px;
+    max-width: 180px;
+} }

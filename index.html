@@ -9,104 +9,77 @@
 </head>
 
 <body class="page">
-
-  <div class="logo">
-    <div class="logo__image"></div>
-  </div>
-  <section class="profile">
-    <div class="profile__image"></div>
-    <div class="profile__info">
-      <p class="profile__name">Жак-Ив Кусто
-      <div class="profile__edit-button"></div>
-      </p>
-      <p class="profile__about">Исследователь океана</p>
-    </div>
-    <form>
-      <button class="profile__add-button"></button>
-    </form>
-  </section>
-  <section class="gallery">
-    <div class="gallery__element">
-      <img class="gallery__image" src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Горы">
-      <div class="gallery__description">
-
-        <p class="gallery__text-description">Карачаево-Черкессия
-        <form class="form">
-          <button type="button" class="gallery__like"></button>
-        </form>
-        </p>
+  <header class="header">
+    <div class="header__image"></div>
+  </header>
+  <main class="content">
+    <section class="profile">
+      <img alt="Фотография профиля пользователя" class="profile__image" src="./images/Avatar.jpg">
+      <div class="profile__info">
+        <h1 class="profile__name">Жак-Ив Кусто</h1>
+        <button type="button" class="profile__edit-button"></button>
+        <p class="profile__about">Исследователь океана</p>
       </div>
-    </div>
-    <div class="gallery__element">
-      <img class="gallery__image" src="./images/kirill-pershin-1404681-unsplash2.jpg" alt="Горы">
-      <div class="gallery__description">
-        <p class="gallery__text-description">Карачаевск
-        <form class="form">
+      <button type="button" class="profile__add-button"></button>
+    </section>
+    <section class="gallery">
+      <div class="gallery__element">
+        <img class="gallery__image" src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Горы">
+        <div class="gallery__description">
+          <h2 class="gallery__text-description">Карачаево-Черкессия</h2>
           <button type="button" class="gallery__like"></button>
-        </form>
-        </p>
+        </div>
       </div>
-    </div>
-    <div class="gallery__element">
-      <img class="gallery__image" src="./images/kirill-pershin-1556355-unsplash3.jpg" alt="Горы">
-      <div class="gallery__description">
-        <p class="gallery__text-description">Карачаевск
-        <form class="form">
+      <div class="gallery__element">
+        <img class="gallery__image" src="./images/kirill-pershin-1404681-unsplash2.jpg" alt="Горы">
+        <div class="gallery__description">
+          <h2 class="gallery__text-description">Карачаевск</h2>
           <button type="button" class="gallery__like"></button>
-        </form>
-        </p>
+        </div>
       </div>
-    </div>
-    <div class="gallery__element">
-      <img class="gallery__image" src="./images/kirill-pershin-1404681-unsplash2.jpg" alt="Горы">
-      <div class="gallery__description">
-        <p class="gallery__text-description">Карачаевск
-        <form class="form">
+      <div class="gallery__element">
+        <img class="gallery__image" src="./images/kirill-pershin-1556355-unsplash3.jpg" alt="Горы">
+        <div class="gallery__description">
+          <h2 class="gallery__text-description">Карачаевск</h2>
           <button type="button" class="gallery__like"></button>
-        </form>
-        </p>
+        </div>
       </div>
-    </div>
-    <div class="gallery__element">
-      <img class="gallery__image" src="./images/kirill-pershin-1556355-unsplash3.jpg" alt="Горы">
-      <div class="gallery__description">
-        <p class="gallery__text-description">Карачаевск
-        <form class="form">
+      <div class="gallery__element">
+        <img class="gallery__image" src="./images/kirill-pershin-1404681-unsplash2.jpg" alt="Горы">
+        <div class="gallery__description">
+          <h2 class="gallery__text-description">Карачаевск</h2>
           <button type="button" class="gallery__like"></button>
-        </form>
-        </p>
+        </div>
       </div>
-    </div>
-    <div class="gallery__element">
-      <img class="gallery__image" src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Горы">
-      <div class="gallery__description">
-        <p class="gallery__text-description">Карачаевск
-        <form class="form">
+      <div class="gallery__element">
+        <img class="gallery__image" src="./images/kirill-pershin-1556355-unsplash3.jpg" alt="Горы">
+        <div class="gallery__description">
+          <h2 class="gallery__text-description">Карачаевск</h2>
           <button type="button" class="gallery__like"></button>
-        </form>
-        </p>
+        </div>
       </div>
-    </div>
-  </section>
-
+      <div class="gallery__element">
+        <img class="gallery__image" src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Горы">
+        <div class="gallery__description">
+          <h2 class="gallery__text-description">Карачаевск</h2>
+          <button type="button" class="gallery__like"></button>
+        </div>
+      </div>
+    </section>
+  </main>
   <footer class="footer">
     <p class="footer__copyright">&#169;2022 Mesto Russia</p>
   </footer>
   <div class="popup popup_opened">
-    <div class="popup__container popup__container_opened">
-      <form><button class="popup__close-icon"></button></form>
-      <h2 class="popup__heading">Редактировать профиль</h2>
-      <fieldset class="popup__inside-container">
-        <input id="name" class="popup__item popup__item_el_name" type="text" name="name" placeholder="Жак-Ив Кусто"
-          required>
-        <input id="about" class="popup__item popup__item_el_about" type="text" name="about"
-          placeholder="Исследователь океана" required>
-      </fieldset>
-      <fieldset class="popup__handlers">
+    <div class="popup__container">
+      <button type="button" class="popup__close-icon"></button>
+      <form class="form" name="edit-profile">
+        <h2 class="popup__heading">Редактировать профиль</h2>
+        <input id="name" class="popup__item" type="text" name="name" placeholder="Жак-Ив Кусто" required>
+        <input id="about" class="popup__item" type="text" name="about" placeholder="Исследователь океана" required>
         <button class="popup__button" type="submit">Сохранить</button>
-      </fieldset>
+      </form>
     </div>
   </div>
 </body>
-
 </html>

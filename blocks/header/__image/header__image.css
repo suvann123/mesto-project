@@ -1,14 +1,15 @@
-.logo__image {
+.header__image {
   background-image: url(../../../images/logo.svg);
   width: 142px;
   height: 33px;
   margin: 0 auto 41px 0;
   background-position: center;
   background-size: contain;
+  background-repeat: no-repeat;
 }
 
 @media (max-width: 768px) {
-  .logo__image {
+  .header__image {
     width: 103px;
     height: 24px;
     margin: 0 auto 31px 27px;

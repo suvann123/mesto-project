@@ -1,7 +1,6 @@
 .profile {
   display: flex;
   width: calc(100% - 400px);
-  min-height: 120px;
   margin: 40px auto 0 auto;
   display: flex;
   flex-direction: row;

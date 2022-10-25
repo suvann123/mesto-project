@@ -1,5 +1,5 @@
 .gallery__image {
-  max-width: 282px;
+  max-width: 100%;
   min-width: 100px;
   min-height: 100px;
   max-height: 282px;
