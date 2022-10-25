@@ -8,6 +8,7 @@
   z-index: 3;
   width: 430px;
   margin: auto;
+  position: relative;
  
 }
 @media (max-width: 920px) {
