@@ -11,13 +11,15 @@
   border: none;
   cursor: pointer;
 }
+
 .profile__edit-button:hover {
   opacity: 0.6;
 }
+
 @media (max-width: 920px) {
   .profile__edit-button {
     margin: auto 0 auto 10px;
     width: 18px;
-  height: 18px;
+    height: 18px;
   }
 }

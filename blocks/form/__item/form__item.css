@@ -1,4 +1,4 @@
-.popup__item {
+.form__item {
   display: block;
   margin: 30px auto 0 auto;
   border: 0;
@@ -14,32 +14,32 @@
 
 }
 
-.popup__item:first-of-type {
+.form__item:first-of-type {
   margin: 0 auto 0 auto;
 }
 
-.popup__item::-webkit-input-placeholder {
+.form__item::-webkit-input-placeholder {
   color: black;
 }
 
-.popup__item::-moz-placeholder {
+.form__item::-moz-placeholder {
   color: black;
 }
 
-.popup__item::-ms-input-placeholder {
+.form__item::-ms-input-placeholder {
   color: black;
 }
 
-.popup__item::placeholder {
+.form__item::placeholder {
   color: black;
 }
 
-.popup__item:last-child {
+.form__item:last-child {
   margin-top: 30px;
 }
 
 @media (max-width: 920px) {
-  .popup__item {
+  .form__item {
     width: 238px;
   }
 }
