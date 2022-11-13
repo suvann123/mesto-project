@@ -22,64 +22,56 @@
       </div>
       <button type="button" class="profile__add-button"></button>
     </section>
+
     <section class="gallery">
-      <div class="gallery__element">
-        <img class="gallery__image" src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Горы">
-        <div class="gallery__description">
-          <h2 class="gallery__text-description">Карачаево-Черкессия</h2>
-          <button type="button" class="gallery__like"></button>
+      <template id="gallery__element">
+        <div class="gallery__element" id="newgallery__element">
+          <button type="button" class="gallery__delete"></button>
+          <img class="gallery__image" src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Добавленное пользователем изображение">
+          <div class="gallery__description">
+            <h2 class="gallery__text-description"></h2>
+            <button type="button" class="gallery__like"></button>
+          </div>
         </div>
-      </div>
-      <div class="gallery__element">
-        <img class="gallery__image" src="./images/kirill-pershin-1404681-unsplash2.jpg" alt="Горы">
-        <div class="gallery__description">
-          <h2 class="gallery__text-description">Карачаевск</h2>
-          <button type="button" class="gallery__like"></button>
-        </div>
-      </div>
-      <div class="gallery__element">
-        <img class="gallery__image" src="./images/kirill-pershin-1556355-unsplash3.jpg" alt="Горы">
-        <div class="gallery__description">
-          <h2 class="gallery__text-description">Карачаевск</h2>
-          <button type="button" class="gallery__like"></button>
-        </div>
-      </div>
-      <div class="gallery__element">
-        <img class="gallery__image" src="./images/kirill-pershin-1404681-unsplash2.jpg" alt="Горы">
-        <div class="gallery__description">
-          <h2 class="gallery__text-description">Карачаевск</h2>
-          <button type="button" class="gallery__like"></button>
-        </div>
-      </div>
-      <div class="gallery__element">
-        <img class="gallery__image" src="./images/kirill-pershin-1556355-unsplash3.jpg" alt="Горы">
-        <div class="gallery__description">
-          <h2 class="gallery__text-description">Карачаевск</h2>
-          <button type="button" class="gallery__like"></button>
-        </div>
-      </div>
-      <div class="gallery__element">
-        <img class="gallery__image" src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Горы">
-        <div class="gallery__description">
-          <h2 class="gallery__text-description">Карачаевск</h2>
-          <button type="button" class="gallery__like"></button>
-        </div>
-      </div>
+      </template>
     </section>
+
   </main>
   <footer class="footer">
     <p class="footer__copyright">&#169;2022 Mesto Russia</p>
   </footer>
-  <div class="popup popup_opened">
+  <div class="popup popup_type_profile">
     <div class="popup__container">
-      <button type="button" class="popup__close-icon"></button>
-      <form class="form" name="edit-profile">
+      <button type="button" class="popup__close-icon popup__close-icon_type_profile"></button>
+      <form class="form form_type_profile" name="edit-profile">
         <h2 class="form__heading">Редактировать профиль</h2>
-        <input id="name" class="form__item" type="text" name="name" placeholder="Жак-Ив Кусто" required>
-        <input id="about" class="form__item" type="text" name="about" placeholder="Исследователь океана" required>
+        <input  class="form__item form__item_type_name" type="text" name="name" placeholder="Жак-Ив Кусто" required>
+        <input  class="form__item form__item_type_about" type="text" name="about" placeholder="Исследователь океана" required>
         <button class="form__button" type="submit">Сохранить</button>
       </form>
     </div>
   </div>
+  <div class="popup popup_type_add-picture">
+    <div class="popup__container">
+      <button type="button"  class="popup__close-icon popup__close-icon_type_add-picture"></button>
+      <form class="form form_type_edit-profile" name="edit-profile">
+        <h2 class="form__heading">Новое место</h2>
+        <input  class="form__item form__item_type_place-name" type="text" name="name" placeholder="Название" required>
+        <input  class="form__item form__item_type_link" type="text" name="about" placeholder="Ссылка на картинку" required>
+        <button class="form__button" type="submit">Создать</button>
+      </form>
+    </div>
+  </div> 
+
+  <div class="popup popup_type_full-picture">
+  <div class="popup__picture-box">
+      <button type="button"  class="popup__close-icon popup__close-icon_type_full-picture" id="findme"></button>
+      <img class="popup__full-picture" alt="Добавленное пользователем изображение">
+      <p class="popup__caption">Надпись</p>
+  </div>
+
+
+  <script src="./script.js"></script>
 </body>
+
 </html>

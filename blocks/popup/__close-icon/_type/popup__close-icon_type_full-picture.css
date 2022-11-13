@@ -1,0 +1,15 @@
+.popup__close-icon_type_full-picture  {
+ 
+  margin: 0;
+  padding: 0;
+  top: -40px;
+  left: unset;
+  right: -40px;
+}
+
+@media (max-width: 920px) {
+  .popup__close-icon_type_full-picture  {
+    top: -36px;
+    right: 0;
+  }
+}

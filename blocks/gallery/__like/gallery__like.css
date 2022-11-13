@@ -2,21 +2,19 @@
   margin: 0;
   height: 19px;
   width: 22px;
-  background-image: url(../../../images/Groupheart.svg);
-  background-color: white;
+  background: url(../../../images/Groupheart.svg) center no-repeat;
   background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
   margin: 31px 20px auto auto;
   border: 0;
   cursor: pointer;
+  opacity: 1;
 }
 
 .gallery__like:hover {
   transition: linear;
   opacity: 0.5;
 }
-
+/*
 .gallery__like:active {
   background-image: url(../../../images/groupheart-active.svg);
-}
+}*/

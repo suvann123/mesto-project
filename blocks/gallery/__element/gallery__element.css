@@ -1,7 +1,7 @@
 .gallery__element {
   max-width: 282px;
-  height: fit-content;
   min-width: 100px;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
