@@ -1,53 +1,84 @@
-let closeButtonEdit = document.querySelector('.popup__close-icon_type_profile');
-let EditProfileButton = document.querySelector('.profile__edit-button');
-let popupProfile = document.querySelector('.popup_type_profile');
-let ProfileInfo = document.querySelector('.profile__info');
-let Name = document.querySelector('.profile__name');
-let About = document.querySelector('.profile__about');
-const FormProfile = document.querySelector('.form_type_profile');
+const closeButtonEdit = document.querySelector('.popup__close-icon_type_profile');
+const editProfileButton = document.querySelector('.profile__edit-button');
+const popupProfile = document.querySelector('.popup_type_profile');
+const profileInfo = document.querySelector('.profile__info');
+let name = document.querySelector('.profile__name');
+let about = document.querySelector('.profile__about');
+const formProfile = document.querySelector('.form_type_profile');
 const addPictureForm = document.querySelector('.form_type_edit-profile');
 let fullPicturePopup = document.querySelector('.popup_type_full-picture');
-let fullImage = document.querySelectorAll('.popup__full-picture');
+let nameInput = document.querySelector('.form__item_type_name');
+let aboutInput = document.querySelector('.form__item_type_about');
+const galleryElementTemplate = document.querySelector('#gallery__element').content;
+const fullImage = fullPicturePopup.querySelector('.popup__full-picture');
+const gallery = document.querySelector('.gallery');
+let inputPlaceName = addPictureForm.querySelector('.form__item_type_place-name');
+let inputLink = addPictureForm.querySelector('.form__item_type_link');
 
-
-function popupOpen (popupName) {
+function openPopup(popupName) {
   popupName.classList.add('popup_opened');
+
 }
 
-function popupClose (popupName) {
+function closePopup(popupName) {
   popupName.classList.remove('popup_opened');
-  const InputName= addPictureForm.querySelector('.form__item_type_place-name').value = '';
-  const InputLink= addPictureForm.querySelector('.form__item_type_link').value = '';
 }
 
 
 
 function formSubmitHandler(evt) {
   evt.preventDefault();
-  const NameInput = FormProfile.querySelector('.form__item_type_name').value;
-  const AboutInput = FormProfile.querySelector('.form__item_type_about').value;
+  name.textContent = nameInput.value.slice(0, 1).toUpperCase() + nameInput.value.slice(1);
+  about.textContent = aboutInput.value.slice(0, 1).toUpperCase() + aboutInput.value.slice(1);
+  nameInput.value = name.textContent;
+  aboutInput.value = about.textContent;
+  closePopup(popupProfile);
 
-  Name.textContent = NameInput.slice(0, 1).toUpperCase() + NameInput.slice(1);
-  About.textContent = AboutInput.slice(0, 1).toUpperCase() + AboutInput.slice(1);
-  popupClose (popupProfile);
 }
 
 
-FormProfile.addEventListener('submit', formSubmitHandler);
+formProfile.addEventListener('submit', formSubmitHandler);
 
 
-EditProfileButton.addEventListener('click', function () {
-  popupOpen (popupProfile);
+editProfileButton.addEventListener('click', function () {
+  aboutInput.textContent = about;
+  openPopup(popupProfile);
 });
 
 closeButtonEdit.addEventListener('click', function () {
-  popupClose (popupProfile);
+  nameInput.value = name.textContent;
+  aboutInput.value = about.textContent;
+  closePopup(popupProfile);
 });
 
-let fullPictureCloseButton = document.querySelector('.popup__close-icon_type_full-picture');
-fullPictureCloseButton.addEventListener ('click', function () {
-  popupClose (fullPicturePopup);
+const fullPictureCloseButton = document.querySelector('.popup__close-icon_type_full-picture');
+fullPictureCloseButton.addEventListener('click', function () {
+  closePopup(fullPicturePopup);
 });
+
+
+function createCard(item) {
+  const galleryElement = galleryElementTemplate.querySelector('.gallery__element').cloneNode(true);
+
+  galleryElement.querySelector('.gallery__like').addEventListener('click', function (evt) {
+    evt.target.classList.toggle('gallery__like_active');
+  });
+
+  galleryElement.querySelector('.gallery__delete').addEventListener('click', function (_evt) {
+    galleryElement.remove();
+  });
+  galleryElement.querySelector('.gallery__image').addEventListener('click', function (_evt) {
+    openPopup(fullPicturePopup);
+    fullImage.src = item.link;
+    fullImage.alt = item.name;
+    let fullImageCaption = fullPicturePopup.querySelector('.popup__caption');
+    fullImageCaption.textContent = item.name;
+  });
+  galleryElement.querySelector('.gallery__text-description').textContent = item.name;
+  galleryElement.querySelector('.gallery__image').src = item.link;
+  galleryElement.querySelector('.gallery__image').alt = item.name;
+  return galleryElement
+};
 
 
 const initialCards = [
@@ -76,79 +107,33 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
-const gallery = document.querySelector('.gallery');
+
 
 initialCards.forEach(function (item) {
-  
-  let galleryElementTemplate = document.querySelector('#gallery__element').content;
-  let galleryElement = galleryElementTemplate.querySelector('.gallery__element').cloneNode(true);
-  galleryElement.querySelector('.gallery__text-description').textContent = item.name;
-  galleryElement.querySelector('.gallery__image').src = item.link;
-  console.log(item.name);
-
-  galleryElement.querySelector('.gallery__like').addEventListener('click', function (evt) {
-    evt.target.classList.toggle('gallery__like_active');
-  });
-
-  galleryElement.querySelector('.gallery__delete').addEventListener('click', function (evt) {
-    galleryElement.remove();
-  });
-  
-  galleryElement.querySelector('.gallery__image').addEventListener('click', function (_evt) {
-    popupOpen (fullPicturePopup);
-    let fullImage = fullPicturePopup.querySelector('.popup__full-picture');
-   fullImage.src = item.link;
-   let fullImageCaption = fullPicturePopup.querySelector('.popup__caption');
-   fullImageCaption.textContent= item.name;
-  });
-  gallery.prepend(galleryElement);
+  gallery.prepend(createCard(item));
 });
 
-let addPicturePopup = document.querySelector('.popup_type_add-picture');
-let addPictureButton = document.querySelector('.profile__add-button');
-let closeButtonAdd = document.querySelector('.popup__close-icon_type_add-picture');
+const addPicturePopup = document.querySelector('.popup_type_add-picture');
+const addPictureButton = document.querySelector('.profile__add-button');
+const closeButtonAdd = document.querySelector('.popup__close-icon_type_add-picture');
 let descriptionInput = document.querySelector('.form__item_type_place-name');
 let linkInput = document.querySelector('.form__item_type_link');
 addPictureButton.addEventListener('click', function () {
-  descriptionInput = '';
-  linkInput = '';
-  popupOpen (addPicturePopup);
+  inputPlaceName = addPictureForm.querySelector('.form__item_type_place-name').value = '';
+  inputLink = addPictureForm.querySelector('.form__item_type_link').value = '';
+  openPopup(addPicturePopup);
 });
 closeButtonAdd.addEventListener('click', function () {
-  popupClose (addPicturePopup);
-  
+  closePopup(addPicturePopup);
 });
 
-
 function addCard(descriptionValue, linkValue) {
-
-  const galleryElementTemplate = document.querySelector('#gallery__element').content;
-  const galleryElement = galleryElementTemplate.querySelector('.gallery__element').cloneNode(true);
-  galleryElement.querySelector('.gallery__text-description').textContent = descriptionValue;
-  galleryElement.querySelector('.gallery__image').src = linkValue;
-
-
-  galleryElement.querySelector('.gallery__like').addEventListener('click', function (evt) {
-    evt.target.classList.toggle('gallery__like_active');
-  });
-
-  galleryElement.querySelector('.gallery__delete').addEventListener('click', function (_evt) {
-    galleryElement.remove();
-  });
-  galleryElement.querySelector('.gallery__image').addEventListener('click', function (_evt) {
-    popupOpen ( fullPicturePopup);
-    let fullImage = fullPicturePopup.querySelector('.popup__full-picture');
-   fullImage.src = linkValue;
-   let fullImageCaption = fullPicturePopup.querySelector('.popup__caption');
-   fullImageCaption.textContent= descriptionValue;
-  });
-  gallery.prepend(galleryElement);
-
+  let placeInfo = {
+    name: descriptionValue,
+    link: linkValue,
+  };
+  gallery.prepend(createCard(placeInfo));
 }
-
-
-let textDescription = document.querySelector('.gallery__text-description').value;
-let imageLink = document.querySelector('.gallery__image');
 
 function formAddSubmitHandler(evt) {
   evt.preventDefault();
@@ -156,21 +141,8 @@ function formAddSubmitHandler(evt) {
   let linkInput = document.querySelector('.form__item_type_link').value;
   descriptionInput = descriptionInput.slice(0, 1).toUpperCase() + descriptionInput.slice(1);
   addCard(descriptionInput, linkInput);
-  popupClose (addPicturePopup);
-  descriptionInput.value = '';
-  linkInput = '';
+  closePopup(addPicturePopup);
+  evt.target.reset();
 }
 addPictureForm.addEventListener('submit', formAddSubmitHandler);
-
-let likeButton = gallery.querySelectorAll('.gallery__like');
-likeButton.addEventListener('click', function (evt) {
-  evt.target.classList.toggle('gallery__like_active');
-});
-
-let deleteButton = document.querySelectorAll('.gallery__delete');
-deleteButton.addEventListener('click', function () {
-  let galleryElements = document.querySelector('.gallery__element')
-  galleryElements.remove();
-});
-
 
