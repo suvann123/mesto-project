@@ -2,18 +2,24 @@ const closeButtonEdit = document.querySelector('.popup__close-icon_type_profile'
 const editProfileButton = document.querySelector('.profile__edit-button');
 const popupProfile = document.querySelector('.popup_type_profile');
 const profileInfo = document.querySelector('.profile__info');
-let name = document.querySelector('.profile__name');
-let about = document.querySelector('.profile__about');
+const name = document.querySelector('.profile__name');
+const about = document.querySelector('.profile__about');
 const formProfile = document.querySelector('.form_type_profile');
 const addPictureForm = document.querySelector('.form_type_edit-profile');
-let fullPicturePopup = document.querySelector('.popup_type_full-picture');
-let nameInput = document.querySelector('.form__item_type_name');
-let aboutInput = document.querySelector('.form__item_type_about');
+const fullPicturePopup = document.querySelector('.popup_type_full-picture');
+const nameInput = document.querySelector('.form__item_type_name');
+const aboutInput = document.querySelector('.form__item_type_about');
 const galleryElementTemplate = document.querySelector('#gallery__element').content;
 const fullImage = fullPicturePopup.querySelector('.popup__full-picture');
 const gallery = document.querySelector('.gallery');
-let inputPlaceName = addPictureForm.querySelector('.form__item_type_place-name');
-let inputLink = addPictureForm.querySelector('.form__item_type_link');
+const inputPlaceName = addPictureForm.querySelector('.form__item_type_place-name');
+const inputLink = addPictureForm.querySelector('.form__item_type_link');
+const fullImageCaption = fullPicturePopup.querySelector('.popup__caption');
+const addPicturePopup = document.querySelector('.popup_type_add-picture');
+const addPictureButton = document.querySelector('.profile__add-button');
+const closeButtonAdd = document.querySelector('.popup__close-icon_type_add-picture');
+const descriptionInput = document.querySelector('.form__item_type_place-name');
+const linkInput = document.querySelector('.form__item_type_link');
 
 function openPopup(popupName) {
   popupName.classList.add('popup_opened');
@@ -26,7 +32,7 @@ function closePopup(popupName) {
 
 
 
-function formSubmitHandler(evt) {
+function handleProfileSubmit(evt) {
   evt.preventDefault();
   name.textContent = nameInput.value.slice(0, 1).toUpperCase() + nameInput.value.slice(1);
   about.textContent = aboutInput.value.slice(0, 1).toUpperCase() + aboutInput.value.slice(1);
@@ -37,7 +43,7 @@ function formSubmitHandler(evt) {
 }
 
 
-formProfile.addEventListener('submit', formSubmitHandler);
+formProfile.addEventListener('submit', handleProfileSubmit);
 
 
 editProfileButton.addEventListener('click', function () {
@@ -71,7 +77,6 @@ function createCard(item) {
     openPopup(fullPicturePopup);
     fullImage.src = item.link;
     fullImage.alt = item.name;
-    let fullImageCaption = fullPicturePopup.querySelector('.popup__caption');
     fullImageCaption.textContent = item.name;
   });
   galleryElement.querySelector('.gallery__text-description').textContent = item.name;
@@ -113,36 +118,30 @@ initialCards.forEach(function (item) {
   gallery.prepend(createCard(item));
 });
 
-const addPicturePopup = document.querySelector('.popup_type_add-picture');
-const addPictureButton = document.querySelector('.profile__add-button');
-const closeButtonAdd = document.querySelector('.popup__close-icon_type_add-picture');
-let descriptionInput = document.querySelector('.form__item_type_place-name');
-let linkInput = document.querySelector('.form__item_type_link');
+
 addPictureButton.addEventListener('click', function () {
-  inputPlaceName = addPictureForm.querySelector('.form__item_type_place-name').value = '';
-  inputLink = addPictureForm.querySelector('.form__item_type_link').value = '';
+  inputPlaceName.value = '';
+  inputLink.value = '';
   openPopup(addPicturePopup);
 });
 closeButtonAdd.addEventListener('click', function () {
   closePopup(addPicturePopup);
 });
 
-function addCard(descriptionValue, linkValue) {
+function addCard(description, linkValue) {
   let placeInfo = {
-    name: descriptionValue,
+    name: description.value,
     link: linkValue,
   };
   gallery.prepend(createCard(placeInfo));
 }
 
-function formAddSubmitHandler(evt) {
+function handleAddPictureSubmit(evt) {
   evt.preventDefault();
-  let descriptionInput = document.querySelector('.form__item_type_place-name').value;
-  let linkInput = document.querySelector('.form__item_type_link').value;
-  descriptionInput = descriptionInput.slice(0, 1).toUpperCase() + descriptionInput.slice(1);
-  addCard(descriptionInput, linkInput);
+  inputPlaceName.value = inputPlaceName.value.slice(0, 1).toUpperCase() + inputPlaceName.value.slice(1);
+  addCard(inputPlaceName, inputLink.value);
   closePopup(addPicturePopup);
   evt.target.reset();
 }
-addPictureForm.addEventListener('submit', formAddSubmitHandler);
+addPictureForm.addEventListener('submit', handleAddPictureSubmit);
 
