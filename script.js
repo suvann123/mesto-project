@@ -4,16 +4,18 @@ const popupProfile = document.querySelector('.popup_type_profile');
 const profileInfo = document.querySelector('.profile__info');
 let name = document.querySelector('.profile__name');
 let about = document.querySelector('.profile__about');
-const formProfile = document.querySelector('.form_type_profile');
-const addPictureForm = document.querySelector('.form_type_edit-profile');
+const formProfile = document.forms.editprofileInfo;
+const addPictureForm = document.forms.editprofilePhoto;
 let fullPicturePopup = document.querySelector('.popup_type_full-picture');
-let nameInput = document.querySelector('.form__item_type_name');
-let aboutInput = document.querySelector('.form__item_type_about');
+let nameInput = document.forms.editprofileInfo.profileName;
+let aboutInput = document.forms.editprofileInfo.profileAbout;
 const galleryElementTemplate = document.querySelector('#gallery__element').content;
 const fullImage = fullPicturePopup.querySelector('.popup__full-picture');
 const gallery = document.querySelector('.gallery');
-let inputPlaceName = addPictureForm.querySelector('.form__item_type_place-name');
-let inputLink = addPictureForm.querySelector('.form__item_type_link');
+let inputPlaceName = document.forms.editprofilePhoto.photoTitle;
+let inputLink = document.forms.editprofilePhoto.photoLink;
+const popupContainer= document.querySelector('.popup__container');
+const popup= document.querySelector('.popup_type_profile ');
 
 function openPopup(popupName) {
   popupName.classList.add('popup_opened');
@@ -146,3 +148,143 @@ function formAddSubmitHandler(evt) {
 }
 addPictureForm.addEventListener('submit', formAddSubmitHandler);
 
+
+
+
+///////////////////
+const formAll =document.querySelector('.form');
+const formInput = document.querySelector('.form__item');
+const formError = document.querySelector(`.${formInput.name}-errormessage`);
+// Функция, которая добавляет класс с ошибкой
+const showInputError = (formAll, formInput, errorMessage) => {
+ // const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+ const errorElement = formAll.querySelector(`.${formInput.name}-errormessage`);
+  formInput.classList.add('form__item_type_error');
+  errorElement.textContent = errorMessage;
+  errorElement.classList.add('form__item-errormessage_active');
+};
+
+// Функция, которая удаляет класс с ошибкой
+const hideInputError = (formAll, formInput) => {
+  const errorElement = formAll.querySelector(`.${formInput.name}-errormessage`);
+  formInput.classList.remove('form__item_type_error');
+  errorElement.classList.remove('form__item-errormessage_active');
+  errorElement.textContent = '';
+};
+
+// Функция, которая проверяет валидность поля. formAll=formElement formInput=inputElement
+const isValid = (formAll, formInput) => {
+  if (formInput.validity.patternMismatch) {
+      // данные атрибута доступны у элемента инпута через ключевое слово dataset.
+      // обратите внимание, что в js имя атрибута пишется в camelCase (да-да, в
+      // HTML мы писали в kebab-case, это не опечатка)
+      formInput.setCustomValidity(formInput.dataset.errorMessage);
+} else {
+  formInput.setCustomValidity("");
+}
+
+if (!formInput.validity.valid) {
+  showInputError(formAll, formInput, formInput.validationMessage);
+} else {
+  hideInputError(formAll, formInput);
+}
+}; 
+
+///////////////////////
+
+const hasInvalidInput = (inputList) => {
+  // проходим по этому массиву методом some
+  return inputList.some((inputElement) => {
+        // Если поле не валидно, колбэк вернёт true
+    // Обход массива прекратится и вся функция
+    // hasInvalidInput вернёт true
+
+    return !inputElement.validity.valid;
+  })
+}; 
+
+
+///////////////
+const toggleButtonState = (inputList, buttonElement) => {
+  // Если есть хотя бы один невалидный инпут
+  if (hasInvalidInput(inputList)) {
+    // сделай кнопку неактивной
+        buttonElement.disabled = true;
+    buttonElement.classList.add('form__button_inactive');
+  } else {
+        // иначе сделай кнопку активной
+        buttonElement.disabled = false;
+    buttonElement.classList.remove('form__button_inactive');
+  }
+}; 
+
+
+
+//
+
+const setEventListeners = (formInput) => {
+
+  const inputList = Array.from(formInput.querySelectorAll('.form__item'));
+  const buttonElement = formInput.querySelector('.form__button');
+  toggleButtonState(inputList, buttonElement);
+  inputList.forEach((inputElement) => {
+    inputElement.addEventListener('input', () => {
+      isValid(formInput, inputElement)
+      toggleButtonState(inputList, buttonElement);
+    });
+    
+  });
+}; 
+
+
+
+///////////////////////
+
+const enableValidation = () => {
+  const formList = Array.from(document.querySelectorAll('.form'));
+
+  formList.forEach((formAll) => {
+    setEventListeners(formAll);
+  });
+};
+
+
+enableValidation(); 
+
+
+
+///////////////////////////
+// Функция принимает массив полей
+
+
+//////////////////////
+
+//////////
+document.addEventListener('keydown', function (evt) {
+  const popupList = Array.from(document.querySelectorAll('.popup'));
+
+  popupList.forEach((popupElement) => {
+
+    if (evt.key === 'Escape') {
+      popupElement.classList.remove('popup_opened');
+    }
+  });
+});
+//////////////////
+
+
+
+const findOverlay = () => {
+  const popupList = document.querySelectorAll('.popup');
+
+  popupList.forEach((popupElement) => {
+    
+
+    popupElement.addEventListener('click', function(){
+     // const overlay= popupElement.querySelector('.overlay');
+      //if (e.target === overlay){
+    popupElement.classList.remove('popup_opened');
+     // }
+  })})};
+findOverlay();
+///////////////////////////////////////////////

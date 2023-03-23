@@ -41,32 +41,43 @@
     <p class="footer__copyright">&#169;2022 Mesto Russia</p>
   </footer>
   <div class="popup popup_type_profile">
-    <div class="popup__container">
+    <div class="popup__container overlay">
       <button type="button" class="popup__close-icon popup__close-icon_type_profile"></button>
-      <form class="form form_type_profile" name="edit-profile">
+      <form class="form form_type_profile form__item_type_error" name="editprofileInfo" novalidate>
         <h2 class="form__heading">Редактировать профиль</h2>
-        <input class="form__item form__item_type_name" type="text" name="name" placeholder="Жак-Ив Кусто" required>
-        <input  class="form__item form__item_type_about" type="text" name="about" placeholder="Исследователь океана" required>
-        <button class="form__button" type="submit">Сохранить</button>
+        <input class="form__item form__item_type_name" type="text" name="profileName" placeholder="Жак-Ив Кусто" id="profileName"
+        required minlength="2" maxlength="40" pattern="^[-а-яА-ЯёЁa-zA-Z\s]+$"  
+        data-error-message="Разрешены только латинские буквы, пробел и дефис">
+        <span class="form__item-errormessage profileName-errormessage "></span>
+        <input  class="form__item form__item_type_about" type="text" name="profileAbout" placeholder="Исследователь океана" 
+        required minlength="2" maxlength="200" pattern="^[a-zA-Z]+$"
+        data-error-message="Разрешены только латинские буквы">
+        <span class=" form__item-errormessage profileAbout-errormessage "></span>
+        <button class="form__button form__button_inactive" type="submit">Сохранить</button>
       </form>
     </div>
   </div>
   <div class="popup popup_type_add-picture">
-    <div class="popup__container">
+    <div class="popup__container overlay">
       <button type="button"  class="popup__close-icon popup__close-icon_type_add-picture"></button>
-      <form class="form form_type_edit-profile" name="edit-profile">
+      <form class="form form_type_edit-profile" name="editprofilePhoto" novalidate>
         <h2 class="form__heading">Новое место</h2>
-        <input  class="form__item form__item_type_place-name" type="text" name="name" placeholder="Название" required>
-        <input  class="form__item form__item_type_link" type="text" name="about" placeholder="Ссылка на картинку" required>
-        <button class="form__button" type="submit">Создать</button>
+        <input  class="form__item form__item_type_place-name" type="text" name="photoTitle" placeholder="Название" 
+        required minlength="2" maxlength="30" pattern="^[a-zA-Z]+$"
+        data-error-message="Разрешены только латинские буквы"> 
+        <span class="form__item-errormessage photoTitle-errormessage "></span>
+        <input  class="form__item form__item_type_link" type="email" name="photoLink" 
+        placeholder="Ссылка на картинку" required >
+        <span class="form__item-errormessage photoLink-errormessage "></span>
+        <button class="form__button form__button_inactive" type="submit">Создать</button>
       </form>
     </div>
   </div> 
 
   <div class="popup popup_type_full-picture">
-  <div class="popup__picture-box">
+  <div class="popup__picture-box " >
       <button type="button"  class="popup__close-icon popup__close-icon_type_full-picture" id="findme"></button>
-      <img class="popup__full-picture" alt="Добавленное пользователем изображение">
+      <img class="popup__full-picture overlay" alt="Добавленное пользователем изображение">
       <p class="popup__caption">Надпись</p>
   </div>
 
