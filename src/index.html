@@ -5,7 +5,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Главная страница</title>
-  <link rel="stylesheet" href="./pages/index.css">
 </head>
 
 <body class="page">
@@ -14,7 +13,7 @@
   </header>
   <main class="content">
     <section class="profile">
-      <img alt="Фотография профиля пользователя" class="profile__image" src="./images/Avatar.jpg">
+      <img src="<%=require('./images/Avatar.jpg')%>" alt="Фотография профиля пользователя" class="profile__image">
       <div class="profile__info">
         <h1 class="profile__name">Жак-Ив Кусто</h1>
         <button type="button" class="profile__edit-button"></button>
@@ -27,7 +26,7 @@
       <template id="gallery__element">
         <div class="gallery__element" id="newgallery__element">
           <button type="button" class="gallery__delete"></button>
-          <img class="gallery__image" src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Добавленное пользователем изображение">
+          <img class="gallery__image" src="<%=require('./images/kirill-pershin-1088404-unsplash.jpg')%>" alt="Добавленное пользователем изображение">
           <div class="gallery__description">
             <h2 class="gallery__text-description"></h2>
             <button type="button" class="gallery__like"></button>
@@ -75,14 +74,11 @@
   </div> 
 
   <div class="popup popup_type_full-picture">
-  <div class="popup__picture-box " >
+  <div class="popup__picture-box" >
       <button type="button"  class="popup__close-icon popup__close-icon_type_full-picture" id="findme"></button>
       <img class="popup__full-picture overlay" alt="Добавленное пользователем изображение">
       <p class="popup__caption">Надпись</p>
   </div>
-
-
-  <script src="./script.js"></script>
 </body>
 
 </html>
