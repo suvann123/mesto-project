@@ -1,10 +1,9 @@
 
-import {openPopup, closePopup} from './modal.js'
-import { addPicturePopup } from './utils.js'
+import {openPopup} from './modal.js'
 
 import {fullPicturePopup,galleryElementTemplate, fullImage, gallery} from './utils.js'
 
-function createCard(item) {
+export function createCard(item) {
   const galleryElement = galleryElementTemplate.querySelector('.gallery__element').cloneNode(true);
 
   galleryElement.querySelector('.gallery__like').addEventListener('click', function (evt) {
@@ -28,7 +27,7 @@ function createCard(item) {
 };
 
 
-const initialCards = [
+export const initialCards = [
   {
     name: 'Архыз',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
@@ -55,29 +54,12 @@ const initialCards = [
   }
 ];
 
-
-initialCards.forEach(function (item) {
-  gallery.prepend(createCard(item));
-});
-
-
-
-function addCard(descriptionValue, linkValue) {
+export function addCard(descriptionValue, linkValue) {
   let placeInfo = {
     name: descriptionValue,
     link: linkValue,
   };
   gallery.prepend(createCard(placeInfo));
-}
-
-export function formAddSubmitHandler(evt) {
-  evt.preventDefault();
-  let descriptionInput = document.querySelector('.form__item_type_place-name').value;
-  let linkInput = document.querySelector('.form__item_type_link').value;
-  descriptionInput = descriptionInput.slice(0, 1).toUpperCase() + descriptionInput.slice(1);
-  addCard(descriptionInput, linkInput);
-  closePopup(addPicturePopup);
-  evt.target.reset();
 }
 
 

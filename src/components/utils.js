@@ -7,16 +7,17 @@ export const addPicturePopup = document.querySelector('.popup_type_add-picture')
 export const closeButtonAdd = document.querySelector('.popup__close-icon_type_add-picture');
 export const formProfile = document.forms.editprofileInfo;
 export const editProfileButton = document.querySelector('.profile__edit-button');
-export let aboutInput = document.forms.editprofileInfo.profileAbout;
-export let about = document.querySelector('.profile__about');
+export const aboutInput = document.forms.editprofileInfo.profileAbout;
+export const about = document.querySelector('.profile__about');
 export const popupProfile = document.querySelector('.popup_type_profile');
 
 //modal
-export let name = document.querySelector('.profile__name'); 
-export let nameInput = document.forms.editprofileInfo.profileName; 
+export const name = document.querySelector('.profile__name'); 
+export const nameInput = document.forms.editprofileInfo.profileName; 
 
 //card
-export let fullPicturePopup = document.querySelector('.popup_type_full-picture');
+export const fullPicturePopup = document.querySelector('.popup_type_full-picture');
 export const galleryElementTemplate = document.querySelector('#gallery__element').content;
 export const fullImage = fullPicturePopup.querySelector('.popup__full-picture');
 export const gallery = document.querySelector('.gallery');
+

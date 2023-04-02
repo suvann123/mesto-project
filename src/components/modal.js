@@ -1,26 +1,21 @@
 
-import {name, about, nameInput, aboutInput, popupProfile,} from './utils.js'
-
+function closePopupByEsc (evt) {
+    if ( evt.key === 'Escape') {
+      const popup = document.querySelector('.popup_opened');
+      closePopup(popup);
+    }
+  };
+;
 
 export function openPopup(popupName) {
   popupName.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupByEsc);
 }
 
 export function closePopup(popupName) {
   popupName.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupByEsc);
 }
-
-export function formSubmitHandler(evt) {
-  evt.preventDefault();
-  name.textContent = nameInput.value.slice(0, 1).toUpperCase() + nameInput.value.slice(1);
-  about.textContent = aboutInput.value.slice(0, 1).toUpperCase() + aboutInput.value.slice(1);
-  nameInput.value = name.textContent;
-  aboutInput.value = about.textContent;
-  closePopup(popupProfile);
-}
-
-
-
 
 const popupList = Array.from(document.querySelectorAll('.popup'));
 popupList.forEach((popup) =>
@@ -33,12 +28,3 @@ popupList.forEach((popup) =>
     }
   })
 );
-
-export function closePopupByEsc (evt) {
-  const popupList = Array.from(document.querySelectorAll('.popup'));
-  popupList.forEach((popupElement) => {
-    if (evt.key === 'Escape') {
-      closePopup(popupElement);
-    }
-  });
-};

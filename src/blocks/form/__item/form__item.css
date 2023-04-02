@@ -1,6 +1,6 @@
 .form__item {
   display: block;
-  margin: 30px auto 0 auto;
+  margin: 10px auto 0 auto;
   border: 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   width: 358px;
@@ -42,4 +42,13 @@
   .form__item {
     width: 238px;
   }
+}
+.form__item::placeholder {
+  font-family: 'Inter', 'Arial', sans-serif;;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #C4C4C4;
+
 }
