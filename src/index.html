@@ -44,15 +44,15 @@
       <button type="button" class="popup__close-icon popup__close-icon_type_profile"></button>
       <form class="form form_type_profile form__item_type_error" name="editprofileInfo" novalidate>
         <h2 class="form__heading">Редактировать профиль</h2>
-        <input class="form__item form__item_type_name" type="text" name="profileName" placeholder="Жак-Ив Кусто" id="profileName"
+        <input class="form__item form__item_type_name" type="text" name="profileName" placeholder="Имя" id="profileName"
         required minlength="2" maxlength="40" pattern="^[-а-яА-ЯёЁa-zA-Z\s]+$"  
         data-error-message="Поле может содержать латинские буквы, кириллические буквы, знаки дефиса и пробелы">
         <span class="form__item-errormessage profileName-errormessage "></span>
-        <input  class="form__item form__item_type_about" type="text" name="profileAbout" placeholder="Исследователь океана" 
+        <input  class="form__item form__item_type_about" type="text" name="profileAbout" placeholder="О себе" 
         required minlength="2" maxlength="200" pattern="^[-а-яА-ЯёЁa-zA-Z\s]+$"
         data-error-message="Поле может содержать латинские буквы, кириллические буквы, знаки дефиса и пробелы">
         <span class=" form__item-errormessage profileAbout-errormessage "></span>
-        <button class="form__button form__button_inactive" type="submit">Сохранить</button>
+        <button class="form__button  form__button_inactive" type="submit">Сохранить</button>
       </form>
     </div>
   </div>
@@ -68,7 +68,7 @@
         <input  class="form__item form__item_type_link" type="url" name="photoLink" 
         placeholder="Ссылка на картинку" required >
         <span class="form__item-errormessage photoLink-errormessage "></span>
-        <button class="form__button form__button_inactive" type="submit">Создать</button>
+        <button id="submitAddPictureButton" class="form__button form__button_inactive form__button_type_submit-picture-adding" type="submit">Создать</button>
       </form>
     </div>
   </div> 

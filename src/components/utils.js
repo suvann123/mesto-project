@@ -21,3 +21,9 @@ export const galleryElementTemplate = document.querySelector('#gallery__element'
 export const fullImage = fullPicturePopup.querySelector('.popup__full-picture');
 export const gallery = document.querySelector('.gallery');
 
+export const objects = {
+  formObject: ".form",
+  formItemObject: ".form__item",
+  inputError: ".form__item_type_errormessage",
+  inputErrorActive: ".form__item-errormessage_active"
+};

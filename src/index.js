@@ -1,13 +1,23 @@
 import {addPictureForm, addPictureButton, inputPlaceName, inputLink, addPicturePopup, closeButtonAdd, formProfile, editProfileButton, aboutInput, 
    about, popupProfile, gallery, name, nameInput} from './components/utils.js'
-import { initialCards, createCard, addCard } from './components/card.js'
-import { enableValidation } from './components/validate.js'
+import { initialCards, createCard} from './components/card.js'
+import {enableValidation } from './components/validate.js'
 import {openPopup, closePopup } from './components/modal.js'
 import './pages/index.css';
+
+
 
 initialCards.forEach(function (item) {
   gallery.prepend(createCard(item));
 });
+
+ function addCard(descriptionValue, linkValue) {
+  const placeInfo = {
+    name: descriptionValue,
+    link: linkValue,
+  };
+  gallery.prepend(createCard(placeInfo));
+}
 
 function formAddSubmitHandler(evt) {
   evt.preventDefault();
@@ -18,7 +28,9 @@ function formAddSubmitHandler(evt) {
 }
 
 addPictureButton.addEventListener('click', function () {
-  enableValidation(); 
+  const submitAddPictureButtonN = document.querySelector('.form__button_type_submit-picture-adding');
+    submitAddPictureButtonN.disabled = true;
+    submitAddPictureButtonN.classList.add('form__button_inactive');
   inputPlaceName.value = '';
   inputLink.value = '';
   openPopup(addPicturePopup);
@@ -28,11 +40,15 @@ closeButtonAdd.addEventListener('click', function () {
 });
 
 addPictureForm.addEventListener('submit', formAddSubmitHandler);
-enableValidation(); 
+submitAddPictureButton.addEventListener('click', () => {
+  enableValidation(); 
+});
+
 formProfile.addEventListener('submit', formProfileSubmitHandler);
 editProfileButton.addEventListener('click', function () {
   openPopup(popupProfile);
 });
+
 
  function formProfileSubmitHandler(evt) {
   evt.preventDefault();
