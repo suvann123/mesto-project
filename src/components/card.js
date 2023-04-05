@@ -54,14 +54,5 @@ export const initialCards = [
   }
 ];
 
-export function addCard(descriptionValue, linkValue) {
-  let placeInfo = {
-    name: descriptionValue,
-    link: linkValue,
-  };
-  gallery.prepend(createCard(placeInfo));
-}
-
-
 
 
