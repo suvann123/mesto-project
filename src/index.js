@@ -19,7 +19,7 @@ initialCards.forEach(function (item) {
   gallery.prepend(createCard(placeInfo));
 }
 
-function formAddSubmitHandler(evt) {
+function addSubmitFormHandler(evt) {
   evt.preventDefault();
   inputPlaceName.value = inputPlaceName.value.slice(0, 1).toUpperCase() + inputPlaceName.value.slice(1);
   addCard(inputPlaceName.value, inputLink.value);
@@ -39,18 +39,20 @@ closeButtonAdd.addEventListener('click', function () {
   closePopup(addPicturePopup);
 });
 
-addPictureForm.addEventListener('submit', formAddSubmitHandler);
+addPictureForm.addEventListener('submit', addSubmitFormHandler);
 submitAddPictureButton.addEventListener('click', () => {
   enableValidation(); 
 });
 
-formProfile.addEventListener('submit', formProfileSubmitHandler);
+formProfile.addEventListener('submit', submitProfileFormHandler);
 editProfileButton.addEventListener('click', function () {
+  nameInput.value = name.textContent;
+  aboutInput.value = about.textContent;
   openPopup(popupProfile);
 });
 
 
- function formProfileSubmitHandler(evt) {
+ function submitProfileFormHandler(evt) {
   evt.preventDefault();
   name.textContent = nameInput.value.slice(0, 1).toUpperCase() + nameInput.value.slice(1);
   about.textContent = aboutInput.value.slice(0, 1).toUpperCase() + aboutInput.value.slice(1);
