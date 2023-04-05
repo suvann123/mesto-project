@@ -18,6 +18,7 @@ export const nameInput = document.forms.editprofileInfo.profileName;
 //card
 export const fullPicturePopup = document.querySelector('.popup_type_full-picture');
 export const galleryElementTemplate = document.querySelector('#gallery__element').content;
+export const galleryElement = document.querySelector('#gallery__element');
 export const fullImage = fullPicturePopup.querySelector('.popup__full-picture');
 export const gallery = document.querySelector('.gallery');
 

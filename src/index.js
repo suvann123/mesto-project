@@ -1,15 +1,13 @@
 import {addPictureForm, addPictureButton, inputPlaceName, inputLink, addPicturePopup, closeButtonAdd, formProfile, editProfileButton, aboutInput, 
-   about, popupProfile, gallery, name, nameInput} from './components/utils.js'
-import { initialCards, createCard} from './components/card.js'
+   about, popupProfile, gallery, name, nameInput, galleryElement} from './components/utils.js'
+import { createCard} from './components/card.js'
 import {enableValidation } from './components/validate.js'
 import {openPopup, closePopup } from './components/modal.js'
 import './pages/index.css';
+import * as api from "./components/api";
 
 
 
-initialCards.forEach(function (item) {
-  gallery.prepend(createCard(item));
-});
 
  function addCard(descriptionValue, linkValue) {
   const placeInfo = {
@@ -58,3 +56,21 @@ editProfileButton.addEventListener('click', function () {
   aboutInput.value = about.textContent;
   closePopup(popupProfile);
 };
+
+Promise.all([
+  api.getProfileInfo(),
+  api.getInitialCards()
+])
+  .then(data => {
+    name.textContent = data[0].name;
+    about.textContent = data[0].about;
+//    profileAvatar.src = data[0].avatar;
+
+    then (data[1].reverse().forEach(card => {
+      const tempCard = gallery.createCard(card,galleryElementTemplate, renderPreviewCallback);
+      gallery.prepend(tempCard);
+    })) ;
+  })
+  .catch(api.handleError);
+
+
