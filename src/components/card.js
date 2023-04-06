@@ -2,16 +2,20 @@
 import {openPopup} from './modal.js'
 
 import {fullPicturePopup,galleryElementTemplate, fullImage, gallery} from './utils.js'
+//////////////////////////////
 
+
+
+/////////////////////////////
 export function createCard(item) {
   const galleryElement = galleryElementTemplate.querySelector('.gallery__element').cloneNode(true);
-
   galleryElement.querySelector('.gallery__like').addEventListener('click', function (evt) {
     evt.target.classList.toggle('gallery__like_active');
   });
 
   galleryElement.querySelector('.gallery__delete').addEventListener('click', function (_evt) {
-    galleryElement.remove();
+    const deletePopup = document.querySelector('.popup_type_delete-picture');
+    deletePopup.classList.add('popup_opened');
   });
   galleryElement.querySelector('.gallery__image').addEventListener('click', function (_evt) {
     openPopup(fullPicturePopup);

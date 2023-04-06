@@ -60,3 +60,6 @@ editProfileButton.addEventListener('click', function () {
   aboutInput.value = about.textContent;
   closePopup(popupProfile);
 };
+
+
+

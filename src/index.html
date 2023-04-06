@@ -13,7 +13,9 @@
   </header>
   <main class="content">
     <section class="profile">
-      <img src="<%=require('./images/Avatar.jpg')%>" alt="Фотография профиля пользователя" class="profile__image">
+      <div class="profile__image-box">
+        <img src="<%=require('./images/Avatar.jpg')%>" alt="Фотография профиля пользователя" class="profile__image">
+      </div>
       <div class="profile__info">
         <h1 class="profile__name" >Жак-Ив Кусто</h1>
         <button type="button" class="profile__edit-button"></button>
@@ -29,7 +31,10 @@
           <img class="gallery__image" src="<%=require('./images/kirill-pershin-1088404-unsplash.jpg')%>" alt="Добавленное пользователем изображение">
           <div class="gallery__description">
             <h2 class="gallery__text-description"></h2>
+          <div class="gallery__likebox">
             <button type="button" class="gallery__like"></button>
+            <p class="gallery__count-likes">0</p>
+          </div>
           </div>
         </div>
       </template>
@@ -79,6 +84,28 @@
       <img class="popup__full-picture overlay" alt="Добавленное пользователем изображение">
       <p class="popup__caption">Надпись</p>
   </div>
+  <div class="popup popup_type_delete-picture">
+    <div class="popup__container overlay">
+      <button type="button"  class="popup__close-icon "></button>
+      <h2 class="form__heading">Вы уверены?</h2>
+      <form class="form form_type_delete-picture" name="deletePictureForm" novalidate>
+        <button id="submitDeletePictureButton" class="form__button" type="submit">Да</button>
+      </form>
+    </div>
+  </div> 
+  <div class="popup popup_type_edit-avatar">
+    <div class="popup__container overlay">
+      <button type="button"  class="popup__close-icon"></button>
+      <form class="form form_type_edit-avatar" name="editAvatarPhoto" novalidate>
+        <h2 class="form__heading">Обновить аватар</h2>
+        <input  class="form__item form__item_type_link" type="url" name="photoLink" 
+        placeholder="Ссылка на новый аватар" required >
+        <span class="form__item-errormessage photoLink-errormessage "></span>
+        <button id="submitEditAvatarButton" class="form__button form__button_inactive" type="submit">Сохранить</button>
+      </form>
+    </div>
+  </div> 
+
 </body>
 
 </html>
