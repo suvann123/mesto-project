@@ -36,3 +36,6 @@
 @import url(../blocks/form/__item-errormessage/form__item-errormessage.css);
 @import url(../blocks/form/__item-errormessage/_active/form__item-errormessage_active.css);
 @import url(../blocks/form/__button/_inactive/form__button_inactive.css);
+@import url(../blocks/gallery/__count-likes/gallery__count-likes.css);
+@import url(../blocks/gallery/__likebox/gallery__likebox.css);
+@import url(../blocks/profile/__image-box/profile__image-box.css);

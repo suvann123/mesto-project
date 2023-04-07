@@ -1,76 +1,123 @@
-import {addPictureForm, addPictureButton, inputPlaceName, inputLink, addPicturePopup, closeButtonAdd, formProfile, editProfileButton, aboutInput, 
-   about, popupProfile, gallery, name, nameInput, galleryElement} from './components/utils.js'
-import { createCard} from './components/card.js'
-import {enableValidation } from './components/validate.js'
-import {openPopup, closePopup } from './components/modal.js'
+import {addPictureForm, addPictureButton, inputPlaceName, inputLink, addPicturePopup, editProfileButton, aboutInput, 
+   about, popupProfile, gallery, name, nameInput, profilePopupSubmitButton, fullPictureDesc, fullImage, fullPicturePopup, 
+   deletePicturePopup, avatarPhoto, avatar, avatarForm, editAvatarPopup, avatarSubmitButton, avatarLinkInput, addCardSubmitButton} from './components/utils.js'
+
 import './pages/index.css';
+import * as cards from "./components/card";
+import { openPopup, closePopup, deletePictureAfterConfirm } from "./components/modal";
+import * as validate from "./components/validate";
 import * as api from "./components/api";
 
+const timeoutDelay = 5000;
 
-
-
- function addCard(descriptionValue, linkValue) {
-  const placeInfo = {
-    name: descriptionValue,
-    link: linkValue,
-  };
-  gallery.prepend(createCard(placeInfo));
-}
-
-function formAddSubmitHandler(evt) {
-  evt.preventDefault();
-  inputPlaceName.value = inputPlaceName.value.slice(0, 1).toUpperCase() + inputPlaceName.value.slice(1);
-  addCard(inputPlaceName.value, inputLink.value);
-  closePopup(addPicturePopup);
-  evt.target.reset();
-}
-
-addPictureButton.addEventListener('click', function () {
-  const submitAddPictureButtonN = document.querySelector('.form__button_type_submit-picture-adding');
-    submitAddPictureButtonN.disabled = true;
-    submitAddPictureButtonN.classList.add('form__button_inactive');
-  inputPlaceName.value = '';
-  inputLink.value = '';
-  openPopup(addPicturePopup);
-});
-closeButtonAdd.addEventListener('click', function () {
-  closePopup(addPicturePopup);
-});
-
-addPictureForm.addEventListener('submit', formAddSubmitHandler);
-submitAddPictureButton.addEventListener('click', () => {
-  enableValidation(); 
-});
-
-formProfile.addEventListener('submit', formProfileSubmitHandler);
-editProfileButton.addEventListener('click', function () {
-  openPopup(popupProfile);
-});
-
-
- function formProfileSubmitHandler(evt) {
-  evt.preventDefault();
-  name.textContent = nameInput.value.slice(0, 1).toUpperCase() + nameInput.value.slice(1);
-  about.textContent = aboutInput.value.slice(0, 1).toUpperCase() + aboutInput.value.slice(1);
+function renderProfilePopup() {
   nameInput.value = name.textContent;
   aboutInput.value = about.textContent;
-  closePopup(popupProfile);
-};
-
-Promise.all([
-  api.getProfileInfo(),
-  api.getInitialCards()
-])
+  
+  openPopup(popupProfile);
+  }
+  
+  function saveProfilePopup(evt) {
+  evt.preventDefault();
+  
+  profilePopupSubmitButton.textContent = "Сохранение...";
+  
+  api.editProfileInfo(nameInput.value, aboutInput.value)
   .then(data => {
+  name.textContent = data.name;
+  about.textContent = data.about;
+  
+  closePopup(popupProfile);
+  })
+  .catch(err => console.log(`Ошибка ${err.status}`))
+  .finally(() => setTimeout(() => profilePopupSubmitButton.textContent = "Сохранить", timeoutDelay));
+  }
+  
+  editProfileButton.addEventListener("click", renderProfilePopup);
+  popupProfile.addEventListener("submit", saveProfilePopup);
+
+
+  function editProfileAvatarPopup() {
+    avatarForm.reset(); 
+    openPopup(editAvatarPopup);
+    }
+    
+  avatar.addEventListener("click", editProfileAvatarPopup);
+
+
+
+
+function submitProfileAvatarPopup(evt) {
+  evt.preventDefault();
+  avatarSubmitButton.textContent = "Сохранение...";
+
+  const newLink = avatarLinkInput.value;
+  api.editAvatar(newLink)
+    .then(data => {
+      avatarPhoto.src = data.avatar;
+      closePopup(editAvatarPopup);
+    })
+    .finally(() => {
+      setTimeout(() => avatarSubmitButton.textContent = "Сохранить", timeoutDelay);
+    });
+}
+
+avatarForm.addEventListener("submit", submitProfileAvatarPopup);
+
+  function renderNewCardPopup() {
+    addPictureForm.reset();
+    openPopup(addPicturePopup);
+  }
+
+  function addNewCardPopup(evt) {
+    evt.preventDefault();
+  
+    addCardSubmitButton.textContent = "Создание...";
+  
+    api.addCard(inputPlaceName.value, inputLink.value)
+      .then(data => {
+        const tempCard = cards.addCard(data, galleryTemplate, editFullPicture, deletePicturePopup);
+        gallery.prepend(tempCard);
+  
+        closePopup(addPicturePopup);
+      })
+  
+      .finally(() => setTimeout(() => addCardSubmitButton.textContent = "Создать", timeoutDelay));
+  }
+  
+  addPictureButton.addEventListener("click", renderNewCardPopup);
+  addPicturePopup.addEventListener("submit", addNewCardPopup);
+
+  const galleryTemplate = document.querySelector("#gallery__element").content;
+
+  function editFullPicture(name, link) {
+    fullImage.src = link;
+    fullImage.alt = name;
+    fullPictureDesc.textContent = name;
+  
+    openPopup(fullPicturePopup);
+  }
+
+  deletePicturePopup.addEventListener("submit", (evt) => {
+    evt.preventDefault();
+  
+    deletePictureAfterConfirm();
+  });
+  
+  Promise.all([
+    api.getProfileInfo(),
+    api.getInitialCards()
+    ])
+    .then(data => {
+    api.showUserId(data[0]._id);
+    
     name.textContent = data[0].name;
     about.textContent = data[0].about;
-//    profileAvatar.src = data[0].avatar;
-
-    then (data[1].reverse().forEach(card => {
-      const tempCard = gallery.createCard(card,galleryElementTemplate, renderPreviewCallback);
-      gallery.prepend(tempCard);
-    })) ;
-  })
-  .catch(api.handleError);
-
-
+    avatarPhoto.src = data[0].avatar;
+    
+    data[1].reverse().forEach(card => {
+    const tempCard = cards.addCard(card, galleryTemplate, editFullPicture, deletePicturePopup);
+    gallery.prepend(tempCard);
+    });
+    })
+ 

@@ -1,3 +1,5 @@
+let deletePictureAction;
+
 
 function closePopupByEsc (evt) {
     if ( evt.key === 'Escape') {
@@ -6,6 +8,10 @@ function closePopupByEsc (evt) {
     }
   };
 ;
+
+export function setDeletePictureAction(action) {
+  deletePictureAction = action;
+}
 
 export function openPopup(popupName) {
   popupName.classList.add('popup_opened');
@@ -28,3 +34,7 @@ popupList.forEach((popup) =>
     }
   })
 );
+
+export function deletePictureAfterConfirm() {
+  deletePictureAction();
+}

@@ -1,3 +1,5 @@
+export let userId;
+
 const config = {
   baseUrl: 'https://nomoreparties.co/v1/plus-cohort-22',
   headers: {
@@ -5,6 +7,10 @@ const config = {
     'Content-Type': 'application/json'
   }
 }
+export function showUserId(id) {
+  userId = id;
+}
+
 
 function getInfo(path, method = "GET", body = null) {
   const params = {
@@ -19,17 +25,11 @@ function getInfo(path, method = "GET", body = null) {
   return fetch(`${config.baseUrl}/${path}`, params)
     .then(res => {
       if (res.ok) return res.json();
-      return Promise.reject(res);
+      return  Promise.reject(`Ошибка: ${res.status}`);
     });
 }
 
-export function handleError(err) {
-  if (err.status === undefined) {
-    console.log('Неизвестная ошибка');
-  } else {
-    console.log(`Ошибка ${err.status}`)
-  }
-}
+
 
 export const getProfileInfo = () => {
   return getInfo("users/me");
