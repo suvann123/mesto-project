@@ -39,3 +39,4 @@
 @import url(../blocks/gallery/__count-likes/gallery__count-likes.css);
 @import url(../blocks/gallery/__likebox/gallery__likebox.css);
 @import url(../blocks/profile/__image-box/profile__image-box.css);
+@import url(../blocks/gallery/__delete/_hidden/gallery__delete_hidden.css);
