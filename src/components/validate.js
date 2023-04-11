@@ -1,19 +1,21 @@
 import { objects } from "./constants.js";
-const showInputError = (formAll, formInput, errorMessage) => {
+
+
+const showInputError = (formAll, formInput, errorMessage, objects) => {
   const errorElement = formAll.querySelector(`.${formInput.name}-errormessage`);
   formInput.classList.add(objects.inputError);
   errorElement.textContent = errorMessage;
   errorElement.classList.add(objects.inputErrorActive);
 };
 
-const hideInputError = (formAll, formInput) => {
+const hideInputError = (formAll, formInput, objects) => {
   const errorElement = formAll.querySelector(`.${formInput.name}-errormessage`);
   formInput.classList.remove(objects.inputError);
   errorElement.classList.remove(objects.inputErrorActive);
   errorElement.textContent = "";
 };
 
-const isValid = (formAll, formInput) => {
+const isValid = (formAll, formInput, objects) => {
   if (formInput.validity.patternMismatch) {
     formInput.setCustomValidity(formInput.dataset.errorMessage);
   } else {
@@ -21,9 +23,9 @@ const isValid = (formAll, formInput) => {
   }
 
   if (!formInput.validity.valid) {
-    showInputError(formAll, formInput, formInput.validationMessage);
+    showInputError(formAll, formInput, formInput.validationMessage, objects);
   } else {
-    hideInputError(formAll, formInput);
+    hideInputError(formAll, formInput, objects);
   }
 };
 
@@ -33,33 +35,32 @@ export const hasInvalidInput = (inputList) => {
   });
 };
 
-export function toggleButtonState(inputList, buttonElement) {
+export function toggleButtonState(inputList, buttonElement, objects) {
   if (hasInvalidInput(inputList)) {
     buttonElement.classList.add(objects.inactiveButton);
     buttonElement.disabled = true;
   } else {
-    buttonElement.classList.remove("form__button_inactive");
+    buttonElement.classList.remove(objects.inactiveButton);
     buttonElement.disabled = false;
   }
 }
 
-const setEventListeners = (formInput) => {
-  const inputList = Array.from(formInput.querySelectorAll(".form__item"));
-  const buttonElement = formInput.querySelector(".form__button");
-  toggleButtonState(inputList, buttonElement);
+const setEventListeners = (formInput, objects) => {
+  const inputList = Array.from(formInput.querySelectorAll(objects.formItemObject));
+  const buttonElement = formInput.querySelector(objects.button);
+  toggleButtonState(inputList, buttonElement, objects);
+
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", () => {
-      isValid(formInput, inputElement);
-      toggleButtonState(inputList, buttonElement);
+      isValid(formInput, inputElement, objects);
+      toggleButtonState(inputList, buttonElement, objects);
     });
   });
 };
 
-export const enableValidation = () => {
-  const formList = Array.from(document.querySelectorAll(".form"));
+export const enableValidation = (objects) => {
+  const formList = Array.from(document.querySelectorAll(objects.formObject));
   formList.forEach((formAll) => {
-    setEventListeners(formAll);
+    setEventListeners(formAll, objects);
   });
 };
-
-enableValidation();

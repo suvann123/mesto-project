@@ -23,6 +23,7 @@ import {
   avatarSubmitButton,
   avatarLinkInput,
   addCardSubmitButton,
+  objects
 } from "./components/constants";
 
 import "./pages/index.css";
@@ -64,7 +65,7 @@ editProfileButton.addEventListener("click", renderProfilePopup);
 popupProfile.addEventListener("submit", saveProfilePopup);
 
 function editProfileAvatarPopup() {
-  validate.toggleButtonState([avatarLinkInput], avatarSubmitButton);
+  validate.toggleButtonState([avatarLinkInput], avatarSubmitButton, objects);
   openPopup(editAvatarPopup);
 }
 
@@ -88,7 +89,7 @@ function submitProfileAvatarPopup(evt) {
 avatarForm.addEventListener("submit", submitProfileAvatarPopup);
 
 function renderNewCardPopup() {
-  validate.toggleButtonState([inputPlaceName, inputLink], addCardSubmitButton);
+  validate.toggleButtonState([inputPlaceName, inputLink], addCardSubmitButton, objects);
   openPopup(addPicturePopup);
 }
 
@@ -134,6 +135,8 @@ deletePicturePopup.addEventListener("submit", (evt) => {
   deletePictureAfterConfirm();
 });
 
+validate.enableValidation(objects);
+
 Promise.all([api.getProfileInfo(), api.getInitialCards()]).then((data) => {
   utils.showUserId(data[0]._id);
 
@@ -149,5 +152,6 @@ Promise.all([api.getProfileInfo(), api.getInitialCards()]).then((data) => {
       deletePicturePopup
     );
     gallery.prepend(tempCard);
-  });
+  })
+  .catch((err) => console.log(`Ошибка ${err.status}`))
 });

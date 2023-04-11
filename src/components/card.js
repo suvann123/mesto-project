@@ -41,13 +41,16 @@ export function addCard(card, galleryTemplate, editCardInfo, deletePopup) {
       api.removeLike(card._id).then((data) => {
         evt.target.classList.toggle("gallery__like_active");
         likeCount.textContent = data.likes.length;
-      });
+      })
+      .catch((err) => console.log(`Ошибка ${err.status}`))
+
     } else {
       api.addLike(card._id).then((data) => {
         evt.target.classList.toggle("gallery__like_active");
 
         likeCount.textContent = data.likes.length;
-      });
+      })
+      .catch((err) => console.log(`Ошибка ${err.status}`))
     }
   });
 
@@ -62,7 +65,8 @@ export function addCard(card, galleryTemplate, editCardInfo, deletePopup) {
         api.delCard(card._id).then(() => {
           galleryElement.remove();
           modal.closePopup(deletePopup);
-        });
+        })
+        .catch((err) => console.log(`Ошибка ${err.status}`))
       });
     });
   }

@@ -1,9 +1,10 @@
 export const objects = {
   formObject: ".form",
   formItemObject: ".form__item",
-  inputError: ".form__item_type_errormessage",
-  inputErrorActive: ".form__item-errormessage_active",
-  inactiveButton: ".form__button_inactive",
+  inputError: "form__item_type_errormessage",
+  inputErrorActive: "form__item-errormessage_active",
+  inactiveButton: "form__button_inactive",
+  button: ".form__button"
 };
 
 //index
@@ -40,7 +41,7 @@ export const fullImage = fullPicturePopup.querySelector(".popup__full-picture");
 export const gallery = document.querySelector(".gallery");
 export const fullPictureDesc = document.querySelector(".popup__caption");
 
-export const profilePopupSubmitButton = document.querySelector(".form__button");
+export const profilePopupSubmitButton = document.querySelector(objects.button);
 export const deletePicturePopup = document.querySelector(
   ".popup_type_delete-picture"
 );
