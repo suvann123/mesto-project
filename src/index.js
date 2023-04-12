@@ -153,5 +153,5 @@ Promise.all([api.getProfileInfo(), api.getInitialCards()]).then((data) => {
     );
     gallery.prepend(tempCard);
   })
-  .catch((err) => console.log(`Ошибка ${err.status}`))
-});
+})
+.catch((err) => console.log(`Ошибка ${err.status}`));
