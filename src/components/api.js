@@ -1,3 +1,10 @@
+export default class Api {
+  constructor({ baseUrl, headers }) {
+    this.baseUrl = baseUrl;
+    this.headers = headers;
+  }
+}
+
 const config = {
   baseUrl: "https://nomoreparties.co/v1/plus-cohort-22",
   headers: {
