@@ -70,7 +70,7 @@ export default class formValidator {
   };
 
   _enableValidation() {
-
+    this._setEventListeners();
   };
 
 }
