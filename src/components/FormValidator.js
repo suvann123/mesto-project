@@ -10,7 +10,7 @@ export default class formValidator {
     this._formAll = formAll;
     this._formInput = this._formAll.querySelector(this._formObject);
     this._iputList = Array.from(this._formInput.querySelectorAll(this._formItemObject));
-    this._buttonElement = this._formInput.querySelector(this._button)
+    this._buttonElement = this._formInput.querySelector(this._button);
   }
 
   _showInputError(formInput, errorMessage) {
@@ -48,7 +48,13 @@ export default class formValidator {
   };
 
   _toggleButtonState() {
-
+    if (this._hasInvalidInput(this._inputList)) {
+      this._buttonElement.classList.add(this._inactiveButton);
+      this._buttonElement.disabled = true;
+    } else {
+      this._buttonElement.classList.remove(this._inactiveButton);
+      this._buttonElement.disabled = false;
+    }
   };
 
   _setEventListeners() {
