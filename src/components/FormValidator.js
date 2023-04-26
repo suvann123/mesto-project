@@ -9,7 +9,7 @@ export default class formValidator {
 
     this._formAll = formAll;
     this._formInput = this._formAll.querySelector(this._formObject);
-    this._iputList = Array.from(this._formInput.querySelectorAll(this._formItemObject));
+    this._inputList = Array.from(this._formInput.querySelectorAll(this._formItemObject));
     this._buttonElement = this._formInput.querySelector(this._button);
   }
 
@@ -58,7 +58,15 @@ export default class formValidator {
   };
 
   _setEventListeners() {
+    this._toggleButtonState();
 
+    this._inputList.forEach((inputElement) => {
+
+      inputElement.addEventListener("input", () => {
+        this._isValid(inputElement);
+        this._toggleButtonState;
+      });
+    });
   };
 
   _enableValidation() {
