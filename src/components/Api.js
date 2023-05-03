@@ -31,6 +31,7 @@ export default class Api {
   }); 
 
 ////////////////////
+
 const config = {
   baseUrl: "https://nomoreparties.co/v1/plus-cohort-22",
   headers: {
