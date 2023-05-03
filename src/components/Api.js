@@ -1,90 +1,62 @@
 export default class Api {
   constructor(config) {
-    this._baseUrl = config.url;
-    this._headers = config.headers;
+    this._config = config;
   }
 
-  makeRequest(path) {
-    return fetch(this._url + path, {
-      method: "GET",
-      headers: this._headers,
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-
-  } };
-
-
-  const config = new Api({
-    baseUrl: 'https://nomoreparties.co/v1/cohort-42',
-    headers: {
-      authorization: 'c56e30dc-2883-4270-a59e-b2f7bae969c6',
-      'Content-Type': 'application/json'
+  handleError(err) {
+    if (err.status) {
+      console.warn(`Ошибка ${err.status}`);
+    } else {
+      console.warn(`Неизвестная ошибка: ${err}`);
     }
-  }); 
+  }
 
-////////////////////
+  _makeRequest = (path, method = "GET", body = null) => {
+    const params = {
+      method: method,
+      headers: this._config.headers
+    };
 
+    if (body) {
+      params.body = JSON.stringify(body);
+    }
 
-const config = {
-  baseUrl: "https://nomoreparties.co/v1/plus-cohort-22",
-  headers: {
-    authorization: "af326577-4d84-4e75-9c90-636557c1da19",
-    "Content-Type": "application/json",
-  },
-};
-
-function makeRequest(path, method = "GET", body = null) {
-  const params = {
-    method: method,
-    headers: config.headers,
+    return fetch(`${this._config.baseUrl}/${path}`, params)
+      .then(res => {
+        if (res.ok) return res.json();
+        return Promise.reject(res);
+      });
   };
 
-  if (body) {
-    params.body = JSON.stringify(body);
+  getProfileInfo() {
+    return this._makeRequest("users/me");
   }
 
-  return fetch(`${config.baseUrl}/${path}`, params).then((res) => {
-    if (res.ok) return res.json();
-    return Promise.reject(`Ошибка: ${res.status}`);
-  });
-}
+  getInitialCards() {
+    return this._makeRequest("cards");
+  }
 
-export const getProfileInfo = () => {
-  return makeRequest("users/me");
-};
+  editUserInfo(name, about) {
+    return this._makeRequest("users/me", "PATCH", { name: name, about: about });
+  }
 
-export function getInitialCards() {
-  return makeRequest("cards");
-}
+  addCard(name, link) {
+    return this._makeRequest("cards", "POST", { name: name, link: link });
+  }
 
-export function editProfileInfo(name, about) {
-  return makeRequest("users/me", "PATCH", { name: name, about: about });
-}
+  delCard = (id) => {
+    return this._makeRequest(`cards/${id}`, "DELETE");
+  };
 
-export function addCard(name, link) {
-  return makeRequest("cards", "POST", { name: name, link: link });
-}
+  addLike = (id) => {
+    return this._makeRequest(`cards/likes/${id}`, "PUT");
+  };
 
-export function delCard(id) {
-  return makeRequest(`cards/${id}`, "DELETE");
-}
+  removeLike(id) {
+    return this._makeRequest(`cards/likes/${id}`, "DELETE");
+  }
 
-export function addLike(id) {
-  return makeRequest(`cards/likes/${id}`, "PUT");
-}
-
-export function removeLike(id) {
-  return makeRequest(`cards/likes/${id}`, "DELETE");
-}
-
-export function editAvatar(link) {
-  return makeRequest("users/me/avatar", "PATCH", { avatar: link });
+  editAvatar(link) {
+    return this._makeRequest("users/me/avatar", "PATCH", { avatar: link });
+  }
 }
